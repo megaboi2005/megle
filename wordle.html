@@ -1,0 +1,116 @@
+<html>
+    <script>
+        const word = "hello";
+        const wordarray = Array.from(word);
+        var rowoffset = 0;
+
+        function charcheck(char) {
+            var output = false;
+            for (let i = 0; i < 5; i++) {
+                
+                if (char == wordarray[i]) { output = true; }
+            }
+            return output;
+        }
+
+        function submit(str) {
+            var array = Array.from(str)
+            var wincheck = true;
+            if (rowoffset != 25) {
+                for (let i=0; i < 5; i++) {
+                    var offset = i+1+rowoffset
+                    document.getElementById(offset.toString()).textContent = array[i];
+                    if (charcheck(array[i])){ document.getElementById(offset.toString()).style.backgroundColor = "#E2FB00"; } else { wincheck = false}
+                    if (array[i] == word[i]){ document.getElementById(offset.toString()).style.backgroundColor = "#40FB00"; }
+                    
+                }
+                
+                if (wincheck == true) {
+                    log("you won!!!")
+                }
+                rowoffset += 5
+            } else {
+                log("game complete")
+            }
+
+        }
+        function log(log) {
+            document.getElementById("log").innerHTML = log;
+            
+        }
+        function run() {
+            log("type in the box and press enter")
+        }
+        document.addEventListener('keydown', (event)=> {    
+            if (event.code == "Enter") {
+                if (document.getElementById("input").value.length == 5) {
+                    log("submitted");
+                    submit(document.getElementById("input").value);
+                    document.getElementById("input").value = "";
+                    
+                } else { 
+                    log("not enough characters");
+                }
+            }
+
+        });
+    </script>
+<style>
+    body {
+        background-color: slategrey;
+    }
+    tr, td {
+        border-style:solid;
+        border-color: black;
+        width: 75px;
+        height: 100px;
+        background-color: grey;
+        text-align: center;
+        color: white;
+        font-size: 50px;
+    }
+</style>
+<body onload="run()">
+<center>
+<table style="border-style:solid;">
+    <tr>
+        <td id="1"></td>
+        <td id="2"></td>
+        <td id="3"></td>
+        <td id="4"></td>
+        <td id="5"></td>
+    </tr>
+    <tr>
+        <td id="6"></td>
+        <td id="7"></td>
+        <td id="8"></td>
+        <td id="9"></td>
+        <td id="10"></td>
+    </tr>
+    <tr>
+        <td id="11"></td>
+        <td id="12"></td>
+        <td id="13"></td>
+        <td id="14"></td>
+        <td id="15"></td>
+    </tr>
+    <tr>
+        <td id="16"></td>
+        <td id="17"></td>
+        <td id="18"></td>
+        <td id="19"></td>
+        <td id="20"></td>
+    </tr>
+    <tr>
+        <td id="21"></td>
+        <td id="22"></td>
+        <td id="23"></td>
+        <td id="24"></td>
+        <td id="25"></td>
+    </tr>
+</table>
+<input type="text" name="text" id="input" maxlength="5" style="width: auto; font-size: 50px;">
+<p id="log"></p>
+</center>
+</body>
+</html>
