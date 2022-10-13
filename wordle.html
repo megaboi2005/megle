@@ -41,16 +41,19 @@
         function run() {
             log("type in the box and press enter")
         }
+        function enter() {
+            if (document.getElementById("input").value.length == 5) {
+                log("submitted");
+                submit(document.getElementById("input").value);
+                document.getElementById("input").value = "";
+                    
+            } else { 
+                log("not enough characters");
+            } 
+        }
         document.addEventListener('keydown', (event)=> {    
             if (event.code == "Enter") {
-                if (document.getElementById("input").value.length == 5) {
-                    log("submitted");
-                    submit(document.getElementById("input").value);
-                    document.getElementById("input").value = "";
-                    
-                } else { 
-                    log("not enough characters");
-                }
+                enter()
             }
 
         });
@@ -110,7 +113,8 @@
     </tr>
 </table>
 <input type="text" name="text" id="input" maxlength="5" style="width: auto; font-size: 50px;">
-<p id="log"></p>
+<button onclick="enter()" style="height: 64px; vertical-align: middle; position: absolute;">submit</button>
+<p id="log">loading...</p>
 </center>
 </body>
 </html>
